@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /merci
+
+Sitemap: https://www.maxpavage.be/sitemap-index.xml

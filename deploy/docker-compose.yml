@@ -1,0 +1,27 @@
+# Déploiement sur le serveur Hetzner, à côté de l'app Angular/Java existante.
+#
+#   docker compose up -d --build
+#
+# Le service oauth-proxy permet la connexion GitHub de l'admin Decap (/admin).
+# Créez d'abord une "GitHub OAuth App" (voir deploy/README.md) et renseignez
+# OAUTH_CLIENT_ID / OAUTH_CLIENT_SECRET dans un fichier .env à côté de ce fichier.
+
+services:
+  site:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    ports:
+      - '8080:80' # adaptez selon votre reverse-proxy existant
+
+  oauth-proxy:
+    # Provider OAuth communautaire pour Decap CMS (github.com/vencax/netlify-cms-github-oauth-provider)
+    build: https://github.com/vencax/netlify-cms-github-oauth-provider.git
+    restart: unless-stopped
+    environment:
+      OAUTH_CLIENT_ID: ${OAUTH_CLIENT_ID}
+      OAUTH_CLIENT_SECRET: ${OAUTH_CLIENT_SECRET}
+      ORIGINS: maxpavage.be,www.maxpavage.be
+    ports:
+      - '8788:3000'

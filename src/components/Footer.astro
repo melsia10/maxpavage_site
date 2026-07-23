@@ -1,0 +1,120 @@
+---
+import { Image } from 'astro:assets';
+import logoBlanc from '../assets/images/logo-blanc.webp';
+import { NAV, SITE } from '../data/site';
+
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <a href="/" aria-label="Max Pavage — accueil" class="site-footer__logo">
+        <Image src={logoBlanc} alt="Max Pavage" width={180} densities={[1, 2]} />
+      </a>
+      <address>
+        {SITE.address.street}<br />
+        {SITE.address.postalCode} {SITE.address.city}
+      </address>
+      <p>
+        <a href={SITE.phoneHref} data-gtag-event="phone_call">{SITE.phone}</a><br />
+        <a href={`mailto:${SITE.email}`} data-gtag-event="email_click">{SITE.email}</a>
+      </p>
+    </div>
+    <nav aria-label="Navigation pied de page">
+      <h2 class="site-footer__title">Nos services</h2>
+      <ul>
+        {NAV.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+        <li><a href="/contactus">Contact</a></li>
+      </ul>
+    </nav>
+    <div>
+      <h2 class="site-footer__title">Suivez-nous</h2>
+      <ul class="site-footer__socials">
+        <li><a href={SITE.socials.facebook} rel="noopener" target="_blank">Facebook</a></li>
+        <li><a href={SITE.socials.instagram} rel="noopener" target="_blank">Instagram</a></li>
+        <li><a href={SITE.socials.linkedin} rel="noopener" target="_blank">LinkedIn</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="container site-footer__legal">
+    <p>Copyright © {year} {SITE.legalName}</p>
+    <p><a href="/privacy">Politique vie privée</a></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background: var(--dark);
+    color: rgba(255, 255, 255, 0.85);
+    padding-block: 3.5rem 1.5rem;
+    margin-top: auto;
+  }
+
+  .site-footer a {
+    color: rgba(255, 255, 255, 0.85);
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    color: var(--white);
+    text-decoration: underline;
+  }
+
+  .site-footer__grid {
+    display: grid;
+    gap: 2.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .site-footer__logo {
+    display: inline-block;
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 0.75rem 1rem;
+  }
+
+  @media (min-width: 700px) {
+    .site-footer__grid {
+      grid-template-columns: 1.4fr 1fr 1fr;
+    }
+  }
+
+  .site-footer__title {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .site-footer ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  address {
+    font-style: normal;
+    margin-block: 1.25rem 0.75rem;
+  }
+
+  .site-footer__legal {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+    margin-top: 2.5rem;
+    padding-top: 1.25rem;
+    font-size: 0.9rem;
+  }
+
+  .site-footer__legal p {
+    margin: 0;
+  }
+</style>

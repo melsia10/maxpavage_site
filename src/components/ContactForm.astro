@@ -1,0 +1,86 @@
+---
+import { SITE } from '../data/site';
+
+interface Props {
+  heading?: string;
+}
+
+const { heading = 'Contactez-nous' } = Astro.props;
+---
+
+<section class="section section--light" id="contact">
+  <div class="container contact-form">
+    <div class="section-title">
+      <h2>{heading}</h2>
+      <p>Obtenez votre devis personnalisé sous 72 heures.</p>
+    </div>
+    <form action={`https://formsubmit.co/${SITE.email}`} method="POST" class="card contact-form__form">
+      <input type="hidden" name="_subject" value="Nouvelle demande via maxpavage.be" />
+      <input type="hidden" name="_next" value={`${SITE.domain}/merci`} />
+      <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <div class="grid grid--2">
+        <label>
+          Votre nom *
+          <input type="text" name="nom" required autocomplete="name" />
+        </label>
+        <label>
+          Numéro de téléphone
+          <input type="tel" name="telephone" autocomplete="tel" />
+        </label>
+        <label>
+          Votre e-mail *
+          <input type="email" name="email" required autocomplete="email" />
+        </label>
+        <label>
+          Sujet *
+          <input type="text" name="sujet" required />
+        </label>
+      </div>
+      <label>
+        Votre question *
+        <textarea name="message" rows="5" required placeholder="Décrivez votre projet ou votre demande en quelques mots"
+        ></textarea>
+      </label>
+      <button type="submit" class="btn btn--primary" data-gtag-event="form_submit">Envoyer</button>
+    </form>
+  </div>
+</section>
+
+<style>
+  .contact-form__form {
+    max-width: 760px;
+    margin-inline: auto;
+    padding: clamp(1.5rem, 4vw, 2.5rem);
+    display: grid;
+    gap: 1.25rem;
+  }
+
+  label {
+    display: grid;
+    gap: 0.4rem;
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  input,
+  textarea {
+    font: inherit;
+    font-family: var(--font-body);
+    padding: 0.7rem 0.9rem;
+    border: 1px solid var(--grey);
+    border-radius: 8px;
+    background: var(--white);
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+    border-color: var(--primary);
+  }
+
+  button {
+    justify-self: start;
+  }
+</style>

@@ -1,0 +1,166 @@
+---
+import Base from '../layouts/Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import { SITE } from '../data/site';
+
+const faq = [
+  {
+    q: 'Quels types de travaux réalisez-vous ?',
+    a: 'Nous réalisons des travaux d’aménagement extérieur, terrassement, pavage, maçonnerie extérieure, allées, terrasses, bordures et finitions.',
+  },
+  {
+    q: 'Comment pouvons-nous vous contacter ?',
+    a: `Vous pouvez nous contacter par téléphone au ${SITE.phone} ou par email via ${SITE.email}.`,
+  },
+  {
+    q: 'Dans quelles régions intervenez-vous ?',
+    a: 'Nous intervenons principalement dans la région de Liège et ses alentours pour tous types de travaux extérieurs.',
+  },
+  {
+    q: 'Travaillez-vous avec des particuliers et des professionnels ?',
+    a: 'Oui, nous accompagnons aussi bien les particuliers que les professionnels pour leurs projets extérieurs.',
+  },
+  {
+    q: 'Faut-il prévoir des démarches avant les travaux ?',
+    a: 'Selon le type de projet, certaines autorisations peuvent être nécessaires. Nous vous orientons si besoin.',
+  },
+  {
+    q: 'Quelle importance accordez-vous aux délais annoncés ?',
+    a: 'Nous faisons le maximum pour respecter les délais convenus tout en garantissant un travail soigné et de qualité.',
+  },
+];
+
+const faqJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faq.map((item) => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: { '@type': 'Answer', text: item.a },
+  })),
+};
+
+const mapsQuery = encodeURIComponent(
+  `${SITE.legalName}, ${SITE.address.street}, ${SITE.address.postalCode} ${SITE.address.city}`
+);
+---
+
+<Base
+  title="Contact | Max Pavage — Devis gratuit sous 72h"
+  description="Contactez Max Pavage pour vos projets de pavage, terrassement et maçonnerie en Province de Liège. Devis gratuit sous 72h. Tél. +32 87 47 44 01."
+  path="/contactus"
+  jsonLd={[faqJsonLd]}
+>
+  <section class="section">
+    <div class="container">
+      <h1>Contactez-nous</h1>
+      <p>Contactez-nous pour toute question concernant notre entreprise ou nos services.</p>
+      <div class="grid grid--3 contact-cards">
+        <div class="card contact-card">
+          <h2>Adresse</h2>
+          <p>
+            {SITE.address.street}<br />
+            {SITE.address.postalCode} {SITE.address.city}
+          </p>
+        </div>
+        <div class="card contact-card">
+          <h2>Téléphone</h2>
+          <p><a href={SITE.phoneHref} data-gtag-event="phone_call">{SITE.phone}</a></p>
+        </div>
+        <div class="card contact-card">
+          <h2>E-mail</h2>
+          <p><a href={`mailto:${SITE.email}`} data-gtag-event="email_click">{SITE.email}</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ContactForm heading="Parlez-nous de votre projet" />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Où nous trouver</h2>
+      </div>
+      <iframe
+        class="contact-map"
+        src={`https://www.google.com/maps?q=${mapsQuery}&output=embed`}
+        title="Localisation de Max Pavage à Welkenraedt"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        allowfullscreen
+      ></iframe>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Besoin d'aide ?</h2>
+        <p>Les réponses aux questions les plus fréquentes.</p>
+      </div>
+      <div class="faq">
+        {
+          faq.map((item) => (
+            <details class="card faq__item">
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .contact-cards {
+    margin-top: 2rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-card h2 {
+    font-size: 1.05rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary);
+  }
+
+  .contact-card p {
+    margin: 0;
+  }
+
+  .contact-map {
+    width: 100%;
+    height: 420px;
+    border: 0;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+  }
+
+  .faq {
+    display: grid;
+    gap: 1rem;
+    max-width: 800px;
+    margin-inline: auto;
+  }
+
+  .faq__item {
+    padding: 1.1rem 1.4rem;
+  }
+
+  .faq__item summary {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .faq__item p {
+    margin: 0.9rem 0 0;
+    color: var(--text-muted);
+  }
+</style>

@@ -1,0 +1,33 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+import Cta from '../../../components/Cta.astro';
+import RealisationCard from '../../../components/RealisationCard.astro';
+
+const realisations = (await getCollection('realisations')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+---
+
+<Base
+  title="Réalisations | Max Pavage"
+  description="Découvrez nos chantiers de pavage, terrassement, maçonnerie et tapis de pierre réalisés avec soin en Province de Liège."
+  path="/blog/realisations-3"
+>
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h1>Réalisations</h1>
+        <p>
+          Découvrez quelques-uns de nos chantiers réalisés avec soin, précision et passion du
+          travail bien fait.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {realisations.map((r) => <RealisationCard realisation={r} />)}
+      </div>
+    </div>
+  </section>
+
+  <Cta title="+140 chantiers, 72H pour votre devis" subtitle="Planifions un moment ensemble !" />
+</Base>

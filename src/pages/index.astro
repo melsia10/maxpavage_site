@@ -1,0 +1,414 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import { SITE } from '../data/site';
+
+import serviceAmenagements from '../assets/images/service-amenagements-exterieurs.webp';
+import serviceTerrassement from '../assets/images/service-terrassement.webp';
+import serviceMaconnerie from '../assets/images/service-maconnerie.webp';
+import serviceTapis from '../assets/images/service-tapis-de-pierre.webp';
+import equipe from '../assets/images/equipe-max-pavage.jpg';
+
+const services = [
+  {
+    title: 'Aménagements extérieurs',
+    href: '/amenagements-exterieurs',
+    image: serviceAmenagements,
+    alt: 'Aménagement extérieur : terrasse et jardin réalisés par Max Pavage',
+  },
+  {
+    title: 'Terrassements',
+    href: '/terrassement',
+    image: serviceTerrassement,
+    alt: 'Travaux de terrassement réalisés par Max Pavage',
+  },
+  {
+    title: 'Maçonneries',
+    href: '/maconnerie',
+    image: serviceMaconnerie,
+    alt: 'Maçonnerie extérieure réalisée par Max Pavage',
+  },
+  {
+    title: 'Tapis de pierre',
+    href: '/tapis-de-pierre',
+    image: serviceTapis,
+    alt: 'Tapis de pierre posé par Max Pavage',
+  },
+];
+
+const steps = [
+  {
+    title: 'Découverte de vos besoins',
+    text: 'Échange autour de vos besoins, visite du terrain et conseils personnalisés pour définir la meilleure solution.',
+  },
+  {
+    title: 'Devis & planification',
+    text: 'Création d’un devis détaillé et organisation du chantier selon vos disponibilités et les délais prévus.',
+  },
+  {
+    title: 'Réalisation des travaux',
+    text: 'Exécution des travaux d’aménagement extérieur, terrassement ou maçonnerie avec rigueur et précision.',
+  },
+  {
+    title: 'Livraison du chantier',
+    text: 'Vérification des finitions et remise d’un chantier propre, prêt à être pleinement apprécié.',
+  },
+];
+
+const reviews = [
+  {
+    author: 'Jordane Henkens',
+    text: 'Travail au top, réalisation rapide. On est vraiment très content. Jeune entreprise motivée et consciencieuse. On recommande les yeux fermés.',
+  },
+  {
+    author: '35vl',
+    text: "Le patron est consciencieux, pragmatique et à l'écoute. Belle ambiance sur le chantier ! La terrasse fut réalisée comme on le souhaitait. À l'usage, je n'ai pas de grief à transmettre. Pour le suivi, Maxime assure. Merci !",
+  },
+  {
+    author: 'Mélissa Duyckaerts',
+    text: 'Excellent travail pour notre terrasse en pierre naturelle ! Nous sommes absolument ravis du résultat. Maxime a fait preuve d’un souci du détail remarquable : il a pris le temps de reprendre la pose des premières dalles jusqu’à obtenir un alignement parfait avec la façade de notre maison. Un vrai professionnel qui ne lâche rien tant que le travail n’est pas irréprochable. Finition soignée, travail propre, résultat esthétique au-delà de nos attentes. On recommande sans hésitation !',
+  },
+];
+
+const latestRealisations = (await getCollection('realisations'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+---
+
+<Base
+  title="Max Pavage | Pavage, Terrassement, Maçonnerie à Welkenraedt"
+  description="Entreprise familiale d'aménagement extérieur en Province de Liège : pavage, terrassement, maçonnerie, tapis de pierre. 140+ chantiers. Devis sous 72h."
+  path="/"
+>
+  <section class="hero">
+    <div class="hero__fallback" aria-hidden="true">
+      <Image src={equipe} alt="" widths={[800, 1366, 1920]} sizes="100vw" loading="eager" />
+    </div>
+    <div class="hero__video" aria-hidden="true">
+      <iframe
+        src={`https://www.youtube-nocookie.com/embed/${SITE.heroVideoId}?rel=0&autoplay=1&mute=1&controls=0&loop=1&playlist=${SITE.heroVideoId}&fs=0&playsinline=1`}
+        title="Vidéo de présentation Max Pavage"
+        loading="lazy"
+        allow="autoplay; encrypted-media"
+        tabindex="-1"
+      ></iframe>
+    </div>
+    <div class="hero__overlay"></div>
+    <div class="container hero__content">
+      <h1>La passion de la pierre, l'âme d'une famille</h1>
+      <a href="/contactus" class="btn btn--light" data-gtag-event="cta_devis">Obtenir un devis</a>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos services</h2>
+      </div>
+      <div class="grid grid--4">
+        {
+          services.map((s) => (
+            <a href={s.href} class="card service-card">
+              <Image
+                src={s.image}
+                alt={s.alt}
+                widths={[300, 500]}
+                sizes="(max-width: 700px) 100vw, 25vw"
+                class="service-card__image"
+              />
+              <div class="service-card__body">
+                <h3>{s.title}</h3>
+                <span class="service-card__more">En savoir plus →</span>
+              </div>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid--2 team-preview">
+      <Image
+        src={equipe}
+        alt="Maxime et Amandine, fondateurs de Max Pavage, avec leur équipe"
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+        class="team-preview__image"
+      />
+      <div>
+        <h2>Une équipe passionnée à votre service</h2>
+        <p>
+          Derrière chacun de nos projets se trouvent <strong>Maxime et Amandine</strong>, les
+          fondateurs de l'entreprise, qui mettent leur passion, leur expertise et leur exigence au
+          service de chaque client. À leurs côtés, une équipe qualifiée et du matériel performant
+          nous permettent de réaliser des prestations de qualité, avec professionnalisme et
+          efficacité.
+        </p>
+        <a href="/about-us" class="btn btn--outline">En savoir plus sur notre équipe</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--primary">
+    <div class="container">
+      <div class="section-title">
+        <h2>Expertise, rigueur, confiance</h2>
+        <p>Notre savoir-faire en quelques chiffres</p>
+      </div>
+      <div class="grid grid--3 stats">
+        <div class="stats__item">
+          <p class="stats__number">140+</p>
+          <p>Chantiers accomplis</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__number">72H</p>
+          <p>Pour obtenir votre devis</p>
+        </div>
+        <div class="stats__item">
+          <p class="stats__number">7</p>
+          <p>Années d'expérience</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Nos réalisations</h2>
+        <p>
+          Des finitions soignées, des matériaux durables et un savoir-faire reconnu à travers
+          chacune de nos réalisations.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        {latestRealisations.map((r) => <RealisationCard realisation={r} />)}
+      </div>
+      <p class="more-link">
+        <a href="/blog/realisations-3" class="btn btn--outline">Toutes nos réalisations</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-title">
+        <h2>De l’idée à la réalisation</h2>
+      </div>
+      <ol class="grid grid--4 steps">
+        {
+          steps.map((step, i) => (
+            <li class="steps__item">
+              <span class="steps__number">{i + 1}</span>
+              <h3>{step.title}</h3>
+              <p>{step.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <Cta />
+
+  <section class="section">
+    <div class="container">
+      <div class="section-title">
+        <h2>Témoignages de nos clients</h2>
+        <p>Des projets réalisés avec soin, appréciés par des clients satisfaits</p>
+      </div>
+      <div class="grid grid--3">
+        {
+          reviews.map((review) => (
+            <figure class="card review">
+              <blockquote>
+                <p>« {review.text} »</p>
+              </blockquote>
+              <figcaption>{review.author}</figcaption>
+            </figure>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    position: relative;
+    min-height: min(90vh, 700px);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background: var(--dark);
+  }
+
+  .hero__fallback,
+  .hero__video {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+
+  .hero__fallback :global(img) {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__video iframe {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: max(100vw, 178vh);
+    height: max(100vh, 56.25vw);
+    transform: translate(-50%, -50%);
+    border: 0;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(13, 15, 20, 0.55), rgba(28, 63, 142, 0.45));
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    color: var(--white);
+    text-align: center;
+    padding-block: 6rem;
+  }
+
+  .hero__content h1 {
+    max-width: 18ch;
+    margin-inline: auto;
+    text-shadow: 0 2px 18px rgba(13, 15, 20, 0.5);
+  }
+
+  .service-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.2s ease;
+  }
+
+  .service-card:hover {
+    transform: translateY(-4px);
+  }
+
+  .service-card__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .service-card__body {
+    padding: 1.1rem 1.25rem 1.25rem;
+  }
+
+  .service-card__body h3 {
+    margin-bottom: 0.35rem;
+  }
+
+  .service-card__more {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .team-preview {
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .team-preview__image {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .stats {
+    text-align: center;
+  }
+
+  .stats__number {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .stats__item p:last-child {
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0;
+  }
+
+  .more-link {
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: step;
+  }
+
+  .steps__item {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 1.5rem;
+  }
+
+  .steps__number {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: var(--primary);
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .steps__item p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .review {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .review blockquote {
+    margin: 0;
+    flex: 1;
+  }
+
+  .review blockquote p {
+    margin: 0;
+    color: var(--text-muted);
+  }
+
+  .review figcaption {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+  }
+</style>

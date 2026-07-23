@@ -1,0 +1,84 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { TAGS } from '../data/tags';
+
+interface Props {
+  realisation: CollectionEntry<'realisations'>;
+}
+
+const { realisation } = Astro.props;
+const { title, date, location, tag, cover, coverAlt } = realisation.data;
+const href = `/blog/realisations-3/${realisation.id}`;
+const dateLabel = new Intl.DateTimeFormat('fr-BE', { dateStyle: 'long' }).format(date);
+---
+
+<article class="card realisation-card">
+  <a href={href} class="realisation-card__link">
+    <Image
+      src={cover}
+      alt={coverAlt ?? title}
+      widths={[400, 700]}
+      sizes="(max-width: 700px) 100vw, 33vw"
+      class="realisation-card__image"
+    />
+    <div class="realisation-card__body">
+      <p class="realisation-card__meta">
+        <span class="realisation-card__tag">{TAGS[tag]}</span>
+        <time datetime={date.toISOString().slice(0, 10)}>{dateLabel}</time>
+      </p>
+      <h3>{title}</h3>
+      {location && <p class="realisation-card__location">{location}</p>}
+    </div>
+  </a>
+</article>
+
+<style>
+  .realisation-card__link {
+    display: block;
+    color: inherit;
+    text-decoration: none;
+    height: 100%;
+  }
+
+  .realisation-card__image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+  }
+
+  .realisation-card__body {
+    padding: 1.25rem;
+  }
+
+  .realisation-card__body h3 {
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  .realisation-card:hover h3 {
+    color: var(--primary);
+  }
+
+  .realisation-card__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .realisation-card__tag {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .realisation-card__location {
+    margin: 0.4rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+</style>

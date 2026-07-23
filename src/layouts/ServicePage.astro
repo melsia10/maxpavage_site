@@ -1,0 +1,99 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from './Base.astro';
+import ContactForm from '../components/ContactForm.astro';
+import RealisationCard from '../components/RealisationCard.astro';
+import { TAGS, type TagSlug } from '../data/tags';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  h1: string;
+  subtitle: string;
+  paragraphs: string[];
+  image: ImageMetadata;
+  imageAlt: string;
+  tag: TagSlug;
+}
+
+const { title, description, path, h1, subtitle, paragraphs, image, imageAlt, tag } = Astro.props;
+const realisations = (await getCollection('realisations', (r) => r.data.tag === tag)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+const serviceJsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: h1,
+  description,
+  provider: { '@id': 'https://www.maxpavage.be/#business' },
+  areaServed: 'Province de Liège, Belgique',
+};
+---
+
+<Base title={title} description={description} path={path} jsonLd={[serviceJsonLd]}>
+  <section class="section service-hero">
+    <div class="container grid grid--2 service-hero__grid">
+      <div>
+        <h1>{h1}</h1>
+        <p class="service-hero__subtitle">{subtitle}</p>
+        {paragraphs.map((p) => <p>{p}</p>)}
+        <p><strong>Obtenez votre devis personnalisé sous 72 heures.</strong></p>
+        <a href="/contactus" class="btn btn--primary" data-gtag-event="cta_devis">Obtenir un devis</a>
+      </div>
+      <Image
+        src={image}
+        alt={imageAlt}
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+        class="service-hero__image"
+        loading="eager"
+      />
+    </div>
+  </section>
+
+  {
+    realisations.length > 0 && (
+      <section class="section section--light">
+        <div class="container">
+          <div class="section-title">
+            <h2>Nos réalisations en {TAGS[tag].toLowerCase()}</h2>
+          </div>
+          <div class="grid grid--3">
+            {realisations.map((r) => (
+              <RealisationCard realisation={r} />
+            ))}
+          </div>
+        </div>
+      </section>
+    )
+  }
+
+  <ContactForm />
+</Base>
+
+<style>
+  .service-hero__grid {
+    align-items: center;
+    gap: 2.5rem;
+  }
+
+  .service-hero__subtitle {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .service-hero__image {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    max-height: 520px;
+  }
+</style>

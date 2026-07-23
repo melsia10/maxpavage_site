@@ -1,0 +1,179 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import Cta from '../components/Cta.astro';
+
+import equipe from '../assets/images/equipe-max-pavage-about.jpg';
+import maxim from '../assets/images/maxim-fondateur.jpg';
+import amandine from '../assets/images/amandine-cogerante.png';
+import materiel1 from '../assets/images/materiel-1.webp';
+import materiel2 from '../assets/images/materiel-2.jpg';
+import materiel3 from '../assets/images/materiel-3.jpg';
+import materiel4 from '../assets/images/materiel-4.webp';
+
+const materiel = [
+  { src: materiel1, alt: 'L’équipe Max Pavage sur chantier' },
+  { src: materiel2, alt: 'Matériel de chantier Max Pavage' },
+  { src: materiel3, alt: 'Engins de terrassement Max Pavage' },
+  { src: materiel4, alt: 'Équipe Max Pavage au travail' },
+];
+---
+
+<Base
+  title="A propos de Max Pavage | Une histoire de famille"
+  description="Avec plus de dix ans d'expérience dans l'aménagement extérieur, Maxim est bien plus qu'un chef de chantier. Découvrez l'équipe familiale de Max Pavage."
+  path="/about-us"
+>
+  <section class="section">
+    <div class="container">
+      <h1>A propos</h1>
+      <div class="grid grid--2 about-intro">
+        <Image
+          src={equipe}
+          alt="L'équipe Max Pavage au complet"
+          widths={[480, 800, 1200]}
+          sizes="(max-width: 700px) 100vw, 50vw"
+          class="about-image"
+          loading="eager"
+        />
+        <div>
+          <h2>Max Pavage</h2>
+          <p>Max Pavage, c'est une histoire de famille — au sens propre du terme.</p>
+          <p>
+            Maxim et Amandine, mari et femme, ont <strong>tout construit ensemble</strong>, à la
+            force du poignet. Lui sur le terrain, avec sa passion de la pierre et son exigence du
+            détail qu'il cultive depuis ses 15 ans. Elle dans l'ombre au début, puis de plus en plus
+            au cœur de l'entreprise, à gérer avec rigueur tout ce qui se passe en dehors du
+            chantier.
+          </p>
+          <p>
+            Pas d'investisseurs, pas de grands moyens au départ — juste deux jeunes qui y croyaient,
+            une jeep, une remorque et beaucoup de travail. Sept ans plus tard, Max Pavage c'est une
+            équipe de 7 personnes soudées par les mêmes valeurs : le <strong>respect du client</strong>,
+            la fierté du travail bien fait, et cette petite flamme familiale qui fait toute la
+            différence.
+          </p>
+          <p>
+            Quand vous nous confiez votre extérieur, vous faites confiance à des gens qui mettent
+            leur nom et leur cœur dans chaque réalisation.
+          </p>
+          <p class="about-tagline">La passion de la pierre, l'âme d'une famille</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container grid grid--2 profile">
+      <Image
+        src={maxim}
+        alt="Maxim, fondateur et chef de chantier de Max Pavage"
+        widths={[480, 800]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+        class="about-image"
+      />
+      <div>
+        <h2>Max</h2>
+        <p class="profile__role">Fondateur &amp; Chef de chantier — 29 ans</p>
+        <p>
+          Avec plus de 10 ans d'expérience dans l'aménagement extérieur, Maxim est bien plus qu'un
+          chef de chantier — il est votre interlocuteur de A à Z. C'est lui qui vient prendre les
+          mesures, qui vous conseille sur les matériaux et les finitions, et qui suit chaque étape
+          des travaux jusqu'à la livraison. Au fil des années, il a développé une exigence du détail
+          qui est devenue la marque de fabrique de Max Pavage. Pour lui, un chantier n'est terminé
+          que lorsque chaque centimètre est à la hauteur de ce qu'il avait imaginé.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container grid grid--2 profile profile--reverse">
+      <Image
+        src={amandine}
+        alt="Amandine, co-gérante et responsable administrative de Max Pavage"
+        widths={[480, 800]}
+        sizes="(max-width: 700px) 100vw, 50vw"
+        class="about-image"
+      />
+      <div>
+        <h2>Amandine</h2>
+        <p class="profile__role">Co-gérante &amp; Responsable administrative — 26 ans</p>
+        <p>
+          Amandine, c'est la voix de Max Pavage au quotidien. Toujours au bout du téléphone ou
+          derrière un mail, elle met un point d'honneur à ce que chaque client se sente
+          <strong>écouté et bien accompagné</strong>, de la première prise de contact jusqu'à la fin
+          du chantier. Présente dans l'aventure depuis le premier jour, elle connaît Max Pavage dans
+          ses moindres détails — et c'est cette proximité avec le terrain qui fait toute la
+          différence quand vous avez une question ou un projet à concrétiser. Discrète mais
+          indispensable, son sens de l'organisation et son souci du service client sont le
+          complément naturel du travail de terrain de Maxim. Ensemble, ils forment un duo qui ne
+          laisse rien au hasard.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--light">
+    <div class="container">
+      <div class="section-title">
+        <h2>Une équipe et du matériel au top !</h2>
+        <p>Avec une équipe motivée et du matériel de qualité, votre projet est entre de bonnes mains.</p>
+      </div>
+      <div class="grid grid--2 materiel-grid">
+        {
+          materiel.map((m) => (
+            <Image
+              src={m.src}
+              alt={m.alt}
+              widths={[480, 800]}
+              sizes="(max-width: 700px) 100vw, 50vw"
+              class="about-image"
+            />
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <Cta title="Partageons un moment ensemble" />
+</Base>
+
+<style>
+  .about-intro,
+  .profile {
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .about-image {
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    width: 100%;
+    object-fit: cover;
+  }
+
+  .about-tagline {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 1.1rem;
+  }
+
+  .profile__role {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  @media (min-width: 700px) {
+    .profile--reverse > :global(img) {
+      order: 2;
+    }
+  }
+
+  .materiel-grid :global(img) {
+    aspect-ratio: 4 / 3;
+  }
+</style>

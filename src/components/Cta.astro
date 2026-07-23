@@ -1,0 +1,37 @@
+---
+interface Props {
+  title?: string;
+  subtitle?: string;
+}
+
+const { title = 'Planifions un moment ensemble', subtitle } = Astro.props;
+---
+
+<section class="section section--primary cta">
+  <div class="container cta__inner">
+    <div>
+      <h2>{title}</h2>
+      {subtitle && <p>{subtitle}</p>}
+    </div>
+    <a href="/contactus" class="btn btn--light" data-gtag-event="cta_contact">Contactez-nous</a>
+  </div>
+</section>
+
+<style>
+  .cta__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+  }
+
+  .cta h2 {
+    margin: 0;
+  }
+
+  .cta p {
+    margin: 0.5rem 0 0;
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>

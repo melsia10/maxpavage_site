@@ -1,0 +1,43 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base
+  title="Merci pour votre message | Max Pavage"
+  description="Votre message a bien été envoyé. Nous revenons vers vous au plus vite — devis sous 72h."
+  path="/merci"
+  noindex
+>
+  <section class="section">
+    <div class="container thanks">
+      <h1>Merci pour votre message !</h1>
+      <p>
+        Votre demande a bien été envoyée. Nous revenons vers vous au plus vite —
+        comptez maximum 72 heures pour recevoir votre devis.
+      </p>
+      <a href="/" class="btn btn--primary">Retour à l'accueil</a>
+    </div>
+  </section>
+</Base>
+
+<script>
+  // Signale la conversion "envoi de formulaire" à Google Ads
+  declare global {
+    interface Window {
+      gtag?: (...args: unknown[]) => void;
+    }
+  }
+  window.gtag?.('event', 'form_submit_success');
+</script>
+
+<style>
+  .thanks {
+    text-align: center;
+    max-width: 620px;
+    padding-block: 3rem;
+  }
+
+  .thanks p {
+    margin-bottom: 2rem;
+  }
+</style>

@@ -1,0 +1,51 @@
+backend:
+  name: github
+  repo: melsia10/maxpavage_site
+  branch: main
+  # Proxy OAuth auto-hébergé (voir deploy/README) — à adapter une fois déployé
+  base_url: https://www.maxpavage.be
+  auth_endpoint: /oauth/auth
+
+locale: fr
+site_url: https://www.maxpavage.be
+logo_url: https://www.maxpavage.be/favicon.png
+
+media_folder: src/content/realisations/images
+public_folder: ./images
+
+collections:
+  - name: realisations
+    label: Réalisations
+    label_singular: Réalisation
+    folder: src/content/realisations
+    extension: md
+    format: frontmatter
+    create: true
+    slug: '{{slug}}'
+    sortable_fields: [date, title]
+    fields:
+      - { name: title, label: Titre, widget: string }
+      - name: description
+        label: Résumé (SEO)
+        widget: text
+        hint: 1 à 2 phrases. Affiché sur Google et sur les cartes du site.
+      - { name: date, label: Date, widget: datetime, format: 'YYYY-MM-DD', time_format: false }
+      - { name: location, label: Lieu, widget: string, required: false, hint: 'Ex. : Plombières' }
+      - name: tag
+        label: Catégorie
+        widget: select
+        options:
+          - { label: Aménagements extérieurs, value: amenagements-exterieurs-1 }
+          - { label: Terrassements, value: terrassements-2 }
+          - { label: Maçonneries, value: maconneries-3 }
+          - { label: Tapis de pierre, value: tapis-de-pierre-6 }
+      - { name: cover, label: Photo de couverture, widget: image }
+      - name: coverAlt
+        label: Description de la photo de couverture
+        widget: string
+        required: false
+        hint: Décrit la photo pour Google et les personnes malvoyantes.
+      - name: body
+        label: Contenu
+        widget: markdown
+        hint: 'Texte et photos du chantier. Astuce : utilisez des titres « Avant / Pendant / Après ».'
