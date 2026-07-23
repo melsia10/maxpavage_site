@@ -1,3 +1,5 @@
+local_backend: true
+
 backend:
   name: github
   repo: melsia10/maxpavage_site
@@ -45,7 +47,16 @@ collections:
         widget: string
         required: false
         hint: Décrit la photo pour Google et les personnes malvoyantes.
+      - name: gallery
+        label: Galerie photos
+        widget: list
+        required: false
+        label_singular: Photo
+        fields:
+          - { name: src, label: Photo, widget: image }
+          - { name: alt, label: Description (accessibilité), widget: string, required: false }
       - name: body
-        label: Contenu
+        label: Contenu (texte)
         widget: markdown
-        hint: 'Texte et photos du chantier. Astuce : utilisez des titres « Avant / Pendant / Après ».'
+        required: false
+        hint: 'Texte descriptif du chantier. Les photos de la galerie sont affichées automatiquement.'

@@ -9,7 +9,7 @@ interface Props {
 
 const { realisation } = Astro.props;
 const { title, date, location, tag, cover, coverAlt } = realisation.data;
-const href = `/blog/realisations-3/${realisation.id}`;
+const href = `/nos-realisations/${realisation.id}`;
 const dateLabel = new Intl.DateTimeFormat('fr-BE', { dateStyle: 'long' }).format(date);
 ---
 

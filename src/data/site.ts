@@ -31,6 +31,6 @@ export const NAV: NavItem[] = [
   { label: 'Terrassement', href: '/terrassement' },
   { label: 'Maçonnerie', href: '/maconnerie' },
   { label: 'Tapis de pierre', href: '/tapis-de-pierre' },
-  { label: 'Réalisations', href: '/blog/realisations-3' },
+  { label: 'Réalisations', href: '/nos-realisations' },
   { label: 'A propos', href: '/about-us' },
 ];

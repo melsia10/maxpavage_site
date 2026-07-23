@@ -17,6 +17,7 @@ const realisations = defineCollection({
       ]),
       cover: image(),
       coverAlt: z.string().optional(),
+      gallery: z.array(z.object({ src: image(), alt: z.string().optional() })).optional(),
     }),
 });
 

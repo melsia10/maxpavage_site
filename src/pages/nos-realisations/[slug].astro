@@ -2,10 +2,10 @@
 import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
-import Base from '../../../layouts/Base.astro';
-import Cta from '../../../components/Cta.astro';
-import { TAGS } from '../../../data/tags';
-import { SITE } from '../../../data/site';
+import Base from '../../layouts/Base.astro';
+import Cta from '../../components/Cta.astro';
+import { TAGS } from '../../data/tags';
+import { SITE } from '../../data/site';
 
 export async function getStaticPaths() {
   const realisations = await getCollection('realisations');
@@ -20,10 +20,10 @@ interface Props {
 }
 
 const { realisation } = Astro.props;
-const { title, description, date, location, tag, cover, coverAlt } = realisation.data;
+const { title, description, date, location, tag, cover, coverAlt, gallery } = realisation.data;
 const { Content } = await render(realisation);
 const dateLabel = new Intl.DateTimeFormat('fr-BE', { dateStyle: 'long' }).format(date);
-const path = `/blog/realisations-3/${realisation.id}`;
+const path = `/nos-realisations/${realisation.id}`;
 
 const articleJsonLd = {
   '@context': 'https://schema.org',
@@ -50,7 +50,7 @@ const articleJsonLd = {
     <div class="container realisation">
       <header class="realisation__header">
         <p class="realisation__meta">
-          <a href="/blog/realisations-3" class="realisation__back">← Toutes les réalisations</a>
+          <a href="/nos-realisations" class="realisation__back">← Toutes les réalisations</a>
         </p>
         <h1>{title}</h1>
         <p class="realisation__meta">
@@ -71,6 +71,19 @@ const articleJsonLd = {
       <div class="realisation__content">
         <Content />
       </div>
+      {gallery && gallery.length > 0 && (
+        <div class="realisation__gallery">
+          {gallery.map((item) => (
+            <Image
+              src={item.src}
+              alt={item.alt ?? title}
+              widths={[480, 800]}
+              sizes="(max-width: 600px) 100vw, 50vw"
+              class="realisation__gallery-img"
+            />
+          ))}
+        </div>
+      )}
     </div>
   </article>
 
@@ -122,5 +135,26 @@ const articleJsonLd = {
   .realisation__content :global(h3) {
     margin-top: 2.25rem;
     color: var(--primary);
+  }
+
+  .realisation__gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 600px) {
+    .realisation__gallery {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .realisation__gallery-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
   }
 </style>
