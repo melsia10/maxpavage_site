@@ -1,20 +1,32 @@
 ---
-title: "Abris de jardin"
-description: "Construction d’un abri de jardin maçonné : fondations, montage des murs et finitions."
-date: 2026-06-11
-tag: maconneries-3
-cover: ./images/abris-apres.jpg
-coverAlt: "Abri de jardin construit par Max Pavage"
----
+title: Transformation d'un garage en salle de sport – Maçonnerie et rénovation
+description: >-
+  Démolition partielle et transformation complète d'un ancien garage en salle de
+  sport : maçonnerie en briques de parement, nouvelles ouvertures et finitions
+  soignées.
 
+  Nous avons réalisé l'ensemble du gros oeuvre.
+date: 2026-07-24
+location: Plombières
+tag: maconneries-3
+cover: images/dji_0527.jpg
+coverAlt: Résultat de l'annexe construite par Max Pavage
+gallery:
+  - src: images/dji_0544.jpg
+    alt: Avant du bâtiment
+  - src: images/dji_0541.jpg
+    alt: "Côté du bâtiment "
+  - src: images/dji_0537.jpg
+    alt: Arrière du bâtiment
+---
 ## Avant
 
-![Emplacement avant la construction de l’abri de jardin](./images/abris-avant.jpg)
+![Bâtiment après démolition des murs ne présentant pas une bonne stabilité](images/dji_fly_20250521_132406_400_1747826697526_photo.jpg)
 
 ## Pendant
 
-![Construction de l’abri de jardin en cours](./images/abris-pendant.jpg)
+![Construction en cours des murs aillant été abattus](images/img_1078.heic)
 
 ## Après
 
-![Abri de jardin terminé](./images/abris-apres.jpg)
+![Résultat bâtiment terminé](images/dji_0527.jpg)
