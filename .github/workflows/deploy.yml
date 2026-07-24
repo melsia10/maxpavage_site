@@ -8,8 +8,36 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Convert HEIC images to JPEG
+        run: |
+          if ! find src \( -name "*.heic" -o -name "*.HEIC" \) -print -quit | grep -q .; then
+            echo "Aucun fichier HEIC trouvé."
+            exit 0
+          fi
+          echo "Fichiers HEIC détectés — installation du convertisseur..."
+          sudo apt-get install -y -q libheif-examples
+          while IFS= read -r -d $'\0' heic; do
+            jpg="${heic%.*}.jpg"
+            echo "Conversion : $heic → $jpg"
+            heif-convert "$heic" "$jpg"
+            rm "$heic"
+            rel_heic="$(basename "$heic")"
+            rel_jpg="$(basename "$jpg")"
+            find src -name "*.md" -exec sed -i "s|${rel_heic}|${rel_jpg}|g" {} +
+          done < <(find src \( -name "*.heic" -o -name "*.HEIC" \) -print0)
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: convert HEIC images to JPEG [skip ci]"
+          git push
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22

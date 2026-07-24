@@ -1,0 +1,61 @@
+name: Nettoyage images orphelines
+
+on:
+  schedule:
+    # Le 1er de chaque mois à 3h du matin
+    - cron: '0 3 1 * *'
+  workflow_dispatch:
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Supprimer les images orphelines (non référencées depuis > 3 mois)
+        run: |
+          IMAGES_DIR="src/content/realisations/images"
+          CUTOFF=$(date -d "3 months ago" +%s)
+          DELETED=()
+
+          for img in "$IMAGES_DIR"/*; do
+            filename="$(basename "$img")"
+
+            # Vérifier si le fichier est référencé dans un .md
+            if grep -qr "$filename" src/content/realisations/*.md 2>/dev/null; then
+              continue
+            fi
+
+            # Récupérer la date du dernier commit sur ce fichier
+            last_commit=$(git log -1 --format="%ct" -- "$img")
+            if [ -z "$last_commit" ]; then
+              # Fichier jamais commité (ne devrait pas arriver) — ignorer
+              continue
+            fi
+
+            if [ "$last_commit" -lt "$CUTOFF" ]; then
+              echo "Suppression : $filename (dernier commit : $(date -d @$last_commit '+%Y-%m-%d'))"
+              rm "$img"
+              DELETED+=("$filename")
+            else
+              echo "Conservé : $filename (dernier commit : $(date -d @$last_commit '+%Y-%m-%d'), trop récent)"
+            fi
+          done
+
+          if [ ${#DELETED[@]} -eq 0 ]; then
+            echo "Aucune image orpheline à supprimer."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "chore: suppression de ${#DELETED[@]} image(s) orpheline(s) [skip ci]
+
+          $(printf '  - %s\n' "${DELETED[@]}")"
+          git push

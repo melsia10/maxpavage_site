@@ -5,18 +5,13 @@ description: "Rénovation de terrasse à Verviers : pose d'un tapis de pierre
 date: 2026-07-24
 location: Verviers
 tag: tapis-de-pierre-6
-cover: images/dji_0588.jpg
+cover: images/img_3738.jpg
 coverAlt: Tapis de pierre posé par Max Pavage
 gallery:
-  - src: images/img_3737.heic
+  - src: images/img_3738.jpg
     alt: "Résultat "
-  - src: images/img_3738.heic
-    alt: Vue de côté
-  - src: images/img_3728.heic
+  - src: images/img_3728.jpg
     alt: Vue de près du tapis de pierre (2 coloris)
-  - src: images/img_3736.heic
+  - src: images/img_3736.jpg
     alt: Zoom sur la brillance
 ---
-![Tapis de pierre posé — vue d’ensemble]()
-
-![Tapis de pierre — détail de la finition](./images/tapis-de-pierre-2.webp)

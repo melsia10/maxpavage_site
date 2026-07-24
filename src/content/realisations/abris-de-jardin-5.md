@@ -26,7 +26,7 @@ gallery:
 
 ## Pendant
 
-![Construction en cours des murs aillant été abattus](images/img_1131.heic)
+![Construction en cours des murs aillant été abattus](images/img_1131.jpg)
 
 ## Après
 

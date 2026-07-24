@@ -8,5 +8,28 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
+    <script>
+      // Masquer le bouton "Supprimer" dans la médiathèque
+      // Decap CMS injecte son UI dans un iframe — on observe les mutations DOM
+      // pour injecter du CSS dès que le shadow root est disponible.
+      const observer = new MutationObserver(() => {
+        const frame = document.querySelector('iframe');
+        if (!frame) return;
+        try {
+          const doc = frame.contentDocument;
+          if (!doc || doc.querySelector('#no-delete-style')) return;
+          const style = doc.createElement('style');
+          style.id = 'no-delete-style';
+          // Bouton "Delete" dans la médiathèque (libellé "Delete" ou icône corbeille)
+          style.textContent = `
+            [class*="DeleteButton"] { display: none !important; }
+          `;
+          doc.head.appendChild(style);
+        } catch {
+          // Accès cross-origin bloqué — ne rien faire
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    </script>
   </body>
 </html>
