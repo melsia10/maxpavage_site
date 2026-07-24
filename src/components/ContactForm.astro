@@ -14,9 +14,9 @@ const { heading = 'Contactez-nous' } = Astro.props;
       <h2>{heading}</h2>
       <p>Obtenez votre devis personnalisé sous 72 heures.</p>
     </div>
-    <form action={`https://formsubmit.co/${SITE.email}`} method="POST" class="card contact-form__form">
+    <form id="contact-form" class="card contact-form__form">
       <input type="hidden" name="_subject" value="Nouvelle demande via maxpavage.be" />
-      <input type="hidden" name="_next" value={`${SITE.domain}/merci`} />
+      <input type="hidden" name="_captcha" value="false" />
       <input type="text" name="_honey" class="visually-hidden" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <div class="grid grid--2">
         <label>
@@ -42,7 +42,35 @@ const { heading = 'Contactez-nous' } = Astro.props;
         ></textarea>
       </label>
       <button type="submit" class="btn btn--primary" data-gtag-event="form_submit">Envoyer</button>
+      <p id="form-feedback" aria-live="polite"></p>
     </form>
+
+    <script define:vars={{ email: SITE.email, merci: `${SITE.domain}/merci` }}>
+      document.getElementById('contact-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const form = e.target;
+        const feedback = document.getElementById('form-feedback');
+        const btn = form.querySelector('button[type="submit"]');
+        btn.disabled = true;
+        btn.textContent = 'Envoi…';
+        try {
+          const res = await fetch(`https://formsubmit.co/ajax/${email}`, {
+            method: 'POST',
+            headers: { Accept: 'application/json' },
+            body: new FormData(form),
+          });
+          if (res.ok) {
+            window.location.href = merci;
+          } else {
+            throw new Error();
+          }
+        } catch {
+          feedback.textContent = 'Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.';
+          btn.disabled = false;
+          btn.textContent = 'Envoyer';
+        }
+      });
+    </script>
   </div>
 </section>
 
