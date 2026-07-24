@@ -18,6 +18,7 @@ gallery:
     alt: "Côté du bâtiment "
   - src: images/dji_0537.jpg
     alt: Arrière du bâtiment
+  - src: images/dji_0528.jpg
 ---
 ## Avant
 
@@ -25,7 +26,7 @@ gallery:
 
 ## Pendant
 
-![Construction en cours des murs aillant été abattus](images/img_1078.heic)
+![Construction en cours des murs aillant été abattus](images/img_1131.heic)
 
 ## Après
 
