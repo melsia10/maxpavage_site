@@ -68,9 +68,9 @@ const localBusiness = {
     <meta property="og:locale" content="fr_BE" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <script type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(localBusiness)} />
     {jsonLd.map((schema) => (
-      <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+      <script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
     ))}
 
     <!-- Google Consent Mode v2 — doit précéder gtag.js -->
@@ -109,7 +109,7 @@ const localBusiness = {
       });
     </script>
     <!-- Google tag (gtag.js) — Google Ads -->
-    <script async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.googleAdsId}`}></script>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.googleAdsId}`}></script>
   </head>
   <body>
     <Header />

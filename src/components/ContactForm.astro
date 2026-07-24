@@ -45,7 +45,7 @@ const { heading = 'Contactez-nous' } = Astro.props;
       <p id="form-feedback" aria-live="polite"></p>
     </form>
 
-    <script define:vars={{ email: SITE.email, merci: `${SITE.domain}/merci` }}>
+    <script is:inline define:vars={{ email: SITE.email, merci: `${SITE.domain}/merci` }}>
       document.getElementById('contact-form').addEventListener('submit', async (e) => {
         e.preventDefault();
         const form = e.target;
