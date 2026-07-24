@@ -4,35 +4,84 @@ import { SITE } from '../data/site';
 ---
 
 <Base
-  title="Politique vie privée | Max Pavage"
-  description="Politique de confidentialité du site maxpavage.be : données collectées, finalités et droits des visiteurs."
+  title="Mentions légales & Politique de confidentialité | Max Pavage"
+  description="Mentions légales, politique de confidentialité et gestion des cookies du site maxpavage.be."
   path="/privacy"
 >
   <section class="section">
     <div class="container privacy">
-      <h1>Politique vie privée</h1>
+      <h1>Mentions légales & Politique de confidentialité</h1>
+
+      <h2>Mentions légales</h2>
       <p>
-        {SITE.legalName}, {SITE.address.street}, {SITE.address.postalCode}
-        {SITE.address.city}, accorde de l'importance à la protection de votre vie privée.
+        <strong>Dénomination sociale :</strong> Max Pavage SRL<br />
+        <strong>Siège social :</strong> Rue Saint-Paul 243, 4841 Welkenraedt, Belgique<br />
+        <strong>Numéro de TVA :</strong> BE0768 257 519<br />
+        <strong>Téléphone :</strong> <a href={SITE.phoneHref}>{SITE.phone}</a><br />
+        <strong>E-mail :</strong> <a href={`mailto:${SITE.email}`}>{SITE.email}</a>
       </p>
+      <p>
+        <strong>Hébergeur :</strong> Hetzner Online GmbH, Industriestr. 25, 91710 Gunzenhausen, Allemagne
+        — <a href="https://www.hetzner.com" target="_blank" rel="noopener noreferrer">www.hetzner.com</a>
+      </p>
+
       <h2>Données collectées</h2>
       <p>
         Lorsque vous utilisez notre formulaire de contact, nous collectons les données que vous nous
         transmettez (nom, téléphone, e-mail, message) dans le seul but de répondre à votre demande
-        et d'établir un devis. Ces données ne sont jamais revendues à des tiers.
+        et d'établir un devis. Ces données ne sont jamais revendues à des tiers et sont conservées
+        uniquement le temps nécessaire au traitement de votre demande.
       </p>
-      <h2>Mesure d'audience et publicité</h2>
       <p>
-        Ce site utilise Google Ads (balise Google) afin de mesurer l'efficacité de nos campagnes
-        publicitaires. Google peut déposer des cookies à cette fin. Vous pouvez configurer votre
-        navigateur pour refuser les cookies.
+        Le formulaire de contact est traité par le service tiers <strong>FormSubmit.co</strong>, qui
+        achemine les messages vers notre adresse e-mail.
       </p>
-      <h2>Vos droits</h2>
+
+      <h2>Cookies et traceurs</h2>
       <p>
-        Conformément au RGPD, vous disposez d'un droit d'accès, de rectification et de suppression
-        de vos données. Pour l'exercer, contactez-nous à
+        Ce site utilise les cookies suivants :
+      </p>
+      <table>
+        <thead>
+          <tr>
+            <th>Cookie</th>
+            <th>Émetteur</th>
+            <th>Finalité</th>
+            <th>Durée</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>_gcl_au</code>, <code>_gads</code></td>
+            <td>Google Ads</td>
+            <td>Mesure des conversions publicitaires</td>
+            <td>90 jours</td>
+          </tr>
+          <tr>
+            <td><code>mp_consent</code></td>
+            <td>Ce site</td>
+            <td>Mémorisation de votre choix de consentement</td>
+            <td>Stockage local (indéfini)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        Les cookies Google Ads ne sont déposés qu'après votre consentement explicite via la bannière
+        présente sur ce site. Vous pouvez retirer votre consentement à tout moment en vidant le
+        stockage local de votre navigateur, ou en configurant votre navigateur pour refuser les cookies.
+      </p>
+
+      <h2>Vos droits (RGPD)</h2>
+      <p>
+        Conformément au Règlement Général sur la Protection des Données (RGPD — UE 2016/679), vous
+        disposez d'un droit d'accès, de rectification, d'effacement et de portabilité de vos données
+        personnelles. Pour exercer ces droits, contactez-nous à
         <a href={`mailto:${SITE.email}`}>{SITE.email}</a> ou au
         <a href={SITE.phoneHref}>{SITE.phone}</a>.
+      </p>
+      <p>
+        Vous disposez également du droit d'introduire une réclamation auprès de l'Autorité de
+        protection des données belge (APD) — <a href="https://www.autoriteprotectiondonnees.be" target="_blank" rel="noopener noreferrer">autoriteprotectiondonnees.be</a>.
       </p>
     </div>
   </section>
@@ -44,7 +93,34 @@ import { SITE } from '../data/site';
   }
 
   .privacy h2 {
-    margin-top: 2rem;
+    margin-top: 2.5rem;
     font-size: 1.3rem;
+  }
+
+  .privacy table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+  }
+
+  .privacy th,
+  .privacy td {
+    text-align: left;
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--grey);
+  }
+
+  .privacy th {
+    background: var(--light);
+    font-family: var(--font-heading);
+    font-weight: 600;
+  }
+
+  .privacy code {
+    font-size: 0.85em;
+    background: var(--light);
+    padding: 0.1em 0.35em;
+    border-radius: 4px;
   }
 </style>

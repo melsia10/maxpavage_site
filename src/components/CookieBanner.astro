@@ -1,0 +1,111 @@
+---
+---
+
+<div id="cookie-banner" hidden role="dialog" aria-label="Préférences cookies" aria-live="polite">
+  <div class="cookie-inner">
+    <p>
+      Ce site utilise des cookies Google Ads pour mesurer l'efficacité de nos campagnes publicitaires.
+      <a href="/privacy">Politique de confidentialité</a>
+    </p>
+    <div class="cookie-actions">
+      <button id="cookie-refuse" type="button">Refuser</button>
+      <button id="cookie-accept" type="button" class="btn--accept">Accepter</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const CONSENT_KEY = 'mp_consent';
+  const banner = document.getElementById('cookie-banner');
+
+  if (!localStorage.getItem(CONSENT_KEY)) {
+    banner?.removeAttribute('hidden');
+  }
+
+  document.getElementById('cookie-accept')?.addEventListener('click', () => {
+    localStorage.setItem(CONSENT_KEY, 'granted');
+    if (typeof (window as any).gtag === 'function') {
+      (window as any).gtag('consent', 'update', {
+        ad_storage: 'granted',
+        analytics_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+      });
+    }
+    banner?.setAttribute('hidden', '');
+  });
+
+  document.getElementById('cookie-refuse')?.addEventListener('click', () => {
+    localStorage.setItem(CONSENT_KEY, 'denied');
+    banner?.setAttribute('hidden', '');
+  });
+</script>
+
+<style>
+  #cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background: var(--dark);
+    color: var(--white);
+    padding: 1rem 1.25rem;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.25);
+  }
+
+  .cookie-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    max-width: 1140px;
+    margin-inline: auto;
+    flex-wrap: wrap;
+  }
+
+  .cookie-inner p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .cookie-inner a {
+    color: var(--white);
+    text-underline-offset: 3px;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-actions button {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.875rem;
+    padding: 0.5rem 1.25rem;
+    border-radius: 999px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    background: transparent;
+    color: var(--white);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+
+  .cookie-actions button:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.7);
+  }
+
+  .cookie-actions button.btn--accept {
+    background: var(--primary);
+    border-color: var(--primary);
+  }
+
+  .cookie-actions button.btn--accept:hover {
+    background: var(--primary-dark);
+    border-color: var(--primary-dark);
+  }
+</style>

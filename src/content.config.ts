@@ -18,6 +18,7 @@ const realisations = defineCollection({
       cover: image(),
       coverAlt: z.string().optional(),
       gallery: z.array(z.object({ src: image(), alt: z.string().optional() })).optional(),
+      videos: z.array(z.object({ url: z.string().url(), label: z.string().optional() })).optional(),
     }),
 });
 
