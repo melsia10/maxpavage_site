@@ -37,6 +37,10 @@ const { heading = 'Contactez-nous' } = Astro.props;
         </label>
       </div>
       <label>
+        Localité *
+        <input type="text" name="localite" required placeholder="Votre ville ou commune (aide à organiser notre déplacement)" autocomplete="address-level2" />
+      </label>
+      <label>
         Votre question *
         <textarea name="message" rows="5" required placeholder="Décrivez votre projet ou votre demande en quelques mots"
         ></textarea>
