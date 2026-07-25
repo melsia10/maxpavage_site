@@ -19,7 +19,6 @@ gallery:
     alt: Zoom sur la brillance
   - src: images/img_3738.jpg
     alt: Vue de l'autre côté
-videos:
-  - url: https://youtu.be/9xLV82KlkMk
+videos: []
 ---
 Cette terrasse à Verviers a été entièrement rénovée grâce à la pose d'un tapis de pierre en résine drainante. Après préparation du support, nous avons appliqué un revêtement continu, résistant au gel et perméable à l'eau, souligné par une bordure sombre qui structure l'espace. Un résultat esthétique, durable et sans entretien, parfaitement raccordé à la façade en briques.
