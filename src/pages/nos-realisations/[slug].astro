@@ -79,19 +79,6 @@ const articleJsonLd = {
       <div class="realisation__content">
         <Content />
       </div>
-      {gallery && gallery.length > 0 && (
-        <div class="realisation__gallery">
-          {gallery.map((item) => (
-            <Image
-              src={item.src}
-              alt={item.alt ?? title}
-              widths={[480, 800]}
-              sizes="(max-width: 600px) 100vw, 50vw"
-              class="realisation__gallery-img"
-            />
-          ))}
-        </div>
-      )}
       {videos && videos.length > 0 && (
         <div class="realisation__videos">
           {videos.map((video) => {
@@ -112,6 +99,19 @@ const articleJsonLd = {
               </figure>
             );
           })}
+        </div>
+      )}
+      {gallery && gallery.length > 0 && (
+        <div class="realisation__gallery">
+          {gallery.map((item) => (
+            <Image
+              src={item.src}
+              alt={item.alt ?? title}
+              widths={[480, 800]}
+              sizes="(max-width: 600px) 100vw, 50vw"
+              class="realisation__gallery-img"
+            />
+          ))}
         </div>
       )}
     </div>
