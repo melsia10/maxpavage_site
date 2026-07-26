@@ -14,7 +14,7 @@ gallery:
     alt: "Début du chantier "
   - src: images/dji_0383.jpg
     alt: "Fin du chantier "
-  - src: images/img_0711.heic
+  - src: images/img_0711.jpg
     alt: Détail lumineux
 ---
 À Welkenraedt, nous avons réalisé une superbe terrasse en pavés céramique 120x30 imitation bois, associée à de larges palissades de 1m x 1m pour délimiter l'espace avec élégance. Des points lumineux ont été intégrés, pour un extérieur aussi fonctionnel qu'agréable en soirée.

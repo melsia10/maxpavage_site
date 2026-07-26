@@ -5,12 +5,12 @@ description: "Réalisation d'un trottoir en tarmac à Welkenraedt (province de
 date: 2026-07-26
 location: Welkenraedt, province de Liège
 tag: amenagements-exterieurs-1
-cover: images/img_1767-2.heic
+cover: images/img_1767-2.jpg
 coverAlt: Trottoir en tarmac réalisé par Max Pavage
 gallery:
-  - src: images/img_1766.heic
+  - src: images/img_1766.jpg
     alt: Avant réalisation
-  - src: images/img_1768.heic
+  - src: images/img_1768.jpg
     alt: "Résultat "
 ---
 À Welkenraedt, nous avons réalisé un trottoir en tarmac, alliant durabilité et esthétique. Un revêtement posé avec soin pour un résultat net, résistant aux intempéries et adapté aux passages réguliers.
