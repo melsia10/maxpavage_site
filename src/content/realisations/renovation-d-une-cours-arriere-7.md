@@ -1,5 +1,5 @@
 ---
-title: Rénovation d'une cours arrière à Montzen
+title: Rénovation d'une cours arrière à Montzen - Pavage
 description: "Rénovation complète d'une cour arrière à Montzen: terrassement,
   dépose de l'ancien pavage et pose de pavés anthracite avec des coupes
   soignées."
