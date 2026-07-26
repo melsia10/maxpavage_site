@@ -21,6 +21,10 @@ gallery:
     alt: Arrière du bâtiment
   - src: images/dji_0528.jpg
 ---
+###### **Démolition partielle et transformation complète d'un ancien garage en salle de sport à Plmbières : maçonnerie en briques de parement, nouvelles ouvertures et finitions soignées.**
+
+###### **Nous avons réalisé l'ensemble du gros oeuvre.**
+
 ## Avant
 
 ![Bâtiment après démolition des murs ne présentant pas une bonne stabilité](images/dji_fly_20250521_132406_400_1747826697526_photo.jpg)
