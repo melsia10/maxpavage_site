@@ -1,5 +1,5 @@
 ---
-title: Réfection d'une entrée de maison à Plombières
+title: Réfection d'une entrée de maison à Plombières - Pavage
 description: "Rénovation d’une entrée piétonne à Plombières : nouveau pavage,
   propreté et durabilité."
 date: 2026-07-26
