@@ -27,13 +27,7 @@ jobs:
           while IFS= read -r -d $'\0' heic; do
             jpg="${heic%.*}.jpg"
             echo "Conversion : $heic → $jpg"
-            if ! python3 -c '
-import sys
-import pillow_heif
-
-heif_file = pillow_heif.open_heif(sys.argv[1], convert_hdr_to_8bit=True)
-heif_file.to_pillow().convert("RGB").save(sys.argv[2], quality=90)
-' "$heic" "$jpg"; then
+            if ! python3 -c "import sys, pillow_heif; heif_file = pillow_heif.open_heif(sys.argv[1], convert_hdr_to_8bit=True); heif_file.to_pillow().convert('RGB').save(sys.argv[2], quality=90)" "$heic" "$jpg"; then
               echo "::warning::Échec de conversion pour $heic — fichier ignoré (format non supporté)."
               rm -f "$jpg"
               continue
