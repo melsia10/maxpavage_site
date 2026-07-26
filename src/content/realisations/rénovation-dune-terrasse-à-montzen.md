@@ -6,7 +6,7 @@ description: Rénovation complète d'une terrasse avec mise en place d'un draina
 date: 2026-07-26
 location: Montzen, province de Liège
 tag: amenagements-exterieurs-1
-cover: images/dji_0162.jpg
+cover: images/dji_0163.jpg
 coverAlt: Terrasse réalisée par Max Pavage
 gallery:
   - src: images/dji_0143.jpg
