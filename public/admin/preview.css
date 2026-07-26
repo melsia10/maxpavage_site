@@ -1,0 +1,138 @@
+/*
+ * Sous-ensemble de src/styles/global.css + du bloc <style> de
+ * src/pages/nos-realisations/[slug].astro, dupliqué ici pour que l'aperçu
+ * Decap ressemble à la vraie page. À mettre à jour si ces fichiers changent
+ * significativement (couleurs, rayons, mise en page de la fiche réalisation).
+ */
+
+:root {
+  --primary: #1c3f8e;
+  --text: #212529;
+  --text-muted: #5a616b;
+  --white: #ffffff;
+  --radius: 12px;
+  --shadow: 0 10px 30px rgba(13, 15, 20, 0.08);
+  --font-heading: 'Poppins', sans-serif;
+  --font-body: 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 1.5rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--white);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading);
+  line-height: 1.25;
+  margin: 0 0 0.75rem;
+  color: inherit;
+}
+
+h1 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+  font-weight: 700;
+}
+
+p {
+  margin: 0 0 1rem;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.realisation__meta {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+.realisation__tag {
+  font-family: var(--font-heading);
+  font-weight: 600;
+  color: var(--primary);
+}
+
+.realisation__cover {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-top: 1.5rem;
+  object-fit: cover;
+  max-height: 540px;
+}
+
+.realisation__content {
+  margin-top: 2rem;
+}
+
+.realisation__content img {
+  width: 100%;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-block: 1.25rem;
+}
+
+.realisation__content h2,
+.realisation__content h3 {
+  margin-top: 2.25rem;
+  color: var(--primary);
+}
+
+.realisation__gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.realisation__gallery-img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.realisation__videos {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.realisation__video-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  height: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.realisation__video-wrapper iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.realisation__video-caption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+}
