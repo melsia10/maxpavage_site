@@ -19,7 +19,3 @@ gallery:
     alt: "Après travaux "
 ---
 Sur ce chantier, nous avons entièrement refait la terrasse, avec en complément la mise en place d'un drainage sous celle-ci pour garantir une évacuation efficace des eaux sur le long terme.
-
-
-
-L'accès au chantier nécessitait de longer la maison en passant par le jardin avec nos machines. Pour préserver la pelouse de nos clients, nous avons protégé l'ensemble du passage avec nos plaques de roulage. Un détail qui fait toute la différence : après notre intervention, le jardin retrouve son aspect d'origine, sans trace de notre passage.
