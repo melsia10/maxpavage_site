@@ -8,6 +8,70 @@
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@3.3.3/dist/decap-cms.js"></script>
+    <script src="https://unpkg.com/heic-to@1.5.2/dist/iife/heic-to.js"></script>
+    <script>
+      // Convertit automatiquement les photos HEIC/HEIF (iPhone) en JPEG avant
+      // que Decap CMS ne les prenne en charge. Sans ça, Decap accepte l'input
+      // mais rejette silencieusement le fichier (aucune vignette, aucun
+      // commit) car les navigateurs ne savent pas décoder le HEIC.
+      //
+      // On intercepte l'évènement "change" en phase de capture sur
+      // `document`, donc avant le gestionnaire interne de Decap (attaché en
+      // phase de bulle) : on bloque l'évènement d'origine, on convertit le ou
+      // les fichiers HEIC en JPEG, puis on réinjecte un nouvel évènement
+      // "change" avec les fichiers convertis pour que Decap le traite
+      // normalement.
+      //
+      // heic-to (et non heic2any, plus simple mais qui échoue sur les photos
+      // HDR récentes type iPhone 16 Pro) embarque une build à jour de libheif
+      // en WebAssembly.
+      (() => {
+        const processed = new WeakSet();
+
+        const isHeic = (file) => {
+          const type = (file.type || '').toLowerCase();
+          const name = (file.name || '').toLowerCase();
+          return type === 'image/heic' || type === 'image/heif' || /\.hei[cf]$/.test(name);
+        };
+
+        const convertToJpeg = async (file) => {
+          if (!isHeic(file) || processed.has(file)) return file;
+          try {
+            const blob = await window.HeicTo({ blob: file, type: 'image/jpeg', quality: 0.9 });
+            const newName = file.name.replace(/\.hei[cf]$/i, '.jpg');
+            const jpegFile = new File([blob], newName, { type: 'image/jpeg' });
+            processed.add(jpegFile);
+            return jpegFile;
+          } catch (err) {
+            console.error('Échec de la conversion HEIC → JPEG pour', file.name, err);
+            processed.add(file);
+            return file;
+          }
+        };
+
+        document.addEventListener(
+          'change',
+          (event) => {
+            const input = event.target;
+            if (!(input instanceof HTMLInputElement) || input.type !== 'file') return;
+            const files = Array.from(input.files || []);
+            if (files.length === 0) return;
+            if (!files.some(isHeic) || files.every((f) => processed.has(f))) return;
+
+            event.stopImmediatePropagation();
+            event.preventDefault();
+
+            Promise.all(files.map(convertToJpeg)).then((newFiles) => {
+              const dt = new DataTransfer();
+              newFiles.forEach((f) => dt.items.add(f));
+              input.files = dt.files;
+              input.dispatchEvent(new Event('change', { bubbles: true }));
+            });
+          },
+          true,
+        );
+      })();
+    </script>
     <script>
       // Masquer le bouton "Supprimer" dans la médiathèque
       // Decap CMS injecte son UI dans un iframe — on observe les mutations DOM
