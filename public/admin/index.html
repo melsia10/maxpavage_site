@@ -73,6 +73,98 @@
       })();
     </script>
     <script>
+      // Aperçu réaliste des réalisations : reproduit la mise en page réelle
+      // de src/pages/nos-realisations/[slug].astro (mêmes classes CSS) au
+      // lieu de l'aperçu générique de Decap. Le CSS associé est dans
+      // preview.css — c'est une copie adaptée de src/styles/global.css et du
+      // <style> de [slug].astro, à remettre à jour si ces fichiers changent
+      // significativement.
+      CMS.registerPreviewStyle(
+        'https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto&display=swap',
+      );
+      CMS.registerPreviewStyle('preview.css');
+
+      const TAG_LABELS = {
+        'amenagements-exterieurs-1': 'Aménagements extérieurs',
+        'terrassements-2': 'Terrassements',
+        'maconneries-3': 'Maçonneries',
+        'tapis-de-pierre-6': 'Tapis de pierre',
+      };
+
+      const RealisationPreview = createClass({
+        render() {
+          const { entry, getAsset, widgetFor } = this.props;
+          const title = entry.getIn(['data', 'title']) || '';
+          const location = entry.getIn(['data', 'location']);
+          const tag = entry.getIn(['data', 'tag']);
+          const date = entry.getIn(['data', 'date']);
+          const coverPath = entry.getIn(['data', 'cover']);
+          const coverAlt = entry.getIn(['data', 'coverAlt']) || title;
+          const gallery = entry.getIn(['data', 'gallery']);
+          const videos = entry.getIn(['data', 'videos']);
+
+          const dateLabel = date
+            ? new Date(date).toLocaleDateString('fr-BE', { day: 'numeric', month: 'long', year: 'numeric' })
+            : '';
+
+          return h(
+            'article',
+            {},
+            h('h1', {}, title),
+            h(
+              'p',
+              { className: 'realisation__meta' },
+              tag && h('span', { className: 'realisation__tag' }, TAG_LABELS[tag] || tag),
+              location && h('span', {}, ` · ${location}`),
+              dateLabel && h('span', {}, ` · ${dateLabel}`),
+            ),
+            coverPath &&
+              h('img', {
+                className: 'realisation__cover',
+                src: getAsset(coverPath).toString(),
+                alt: coverAlt,
+              }),
+            h('div', { className: 'realisation__content' }, widgetFor('body')),
+            videos &&
+              videos.size > 0 &&
+              h(
+                'div',
+                { className: 'realisation__videos' },
+                videos
+                  .map((video, i) =>
+                    h(
+                      'div',
+                      { key: i, className: 'realisation__video-wrapper' },
+                      h('p', {}, `🎬 ${video.get('label') || video.get('url')}`),
+                    ),
+                  )
+                  .toArray(),
+              ),
+            gallery &&
+              gallery.size > 0 &&
+              h(
+                'div',
+                { className: 'realisation__gallery' },
+                gallery
+                  .map((item, i) => {
+                    const src = item.get('src');
+                    if (!src) return null;
+                    return h('img', {
+                      key: i,
+                      className: 'realisation__gallery-img',
+                      src: getAsset(src).toString(),
+                      alt: item.get('alt') || title,
+                    });
+                  })
+                  .toArray(),
+              ),
+          );
+        },
+      });
+
+      CMS.registerPreviewTemplate('realisations', RealisationPreview);
+    </script>
+    <script>
       // Masquer le bouton "Supprimer" dans la médiathèque
       // Decap CMS injecte son UI dans un iframe — on observe les mutations DOM
       // pour injecter du CSS dès que le shadow root est disponible.
