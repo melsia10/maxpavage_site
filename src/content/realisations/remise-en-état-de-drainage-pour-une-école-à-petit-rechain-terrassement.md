@@ -6,18 +6,18 @@ description: "Réfection complète du drainage d'une école à Petit-Rechain :
 date: 2026-07-26
 location: Petit-Rechain, province de Liège
 tag: terrassements-2
-cover: images/img_1902.heic
+cover: images/img_1902.jpg
 coverAlt: Image du drainage
 gallery:
-  - src: images/img_1846.heic
+  - src: images/img_1846.jpg
     alt: Sécurisation de la tranchée
-  - src: images/img_1926.heic
+  - src: images/img_1926.jpg
     alt: Aperçu des divers élément du drainage
-  - src: images/img_1901.heic
+  - src: images/img_1901.jpg
     alt: "Placement du "
-  - src: images/img_2128.heic
+  - src: images/img_2128.jpg
     alt: Empierrement placé
-  - src: images/img_2130.heic
+  - src: images/img_2130.jpg
     alt: Support avant pose de tarmac
   - src: images/061ca181-d553-4df9-93ad-5108b5307649.jpg
 ---
