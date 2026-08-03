@@ -64,6 +64,7 @@ const { heading = 'Contactez-nous' } = Astro.props;
             body: new FormData(form),
           });
           if (res.ok) {
+            sessionStorage.setItem('form_submitted', '1');
             window.location.href = merci;
           } else {
             throw new Error();

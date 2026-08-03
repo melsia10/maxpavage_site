@@ -21,13 +21,17 @@ import Base from '../layouts/Base.astro';
 </Base>
 
 <script>
-  // Signale la conversion "envoi de formulaire" à Google Ads
   declare global {
     interface Window {
       gtag?: (...args: unknown[]) => void;
     }
   }
-  window.gtag?.('event', 'form_submit_success');
+  if (sessionStorage.getItem('form_submitted') === '1') {
+    sessionStorage.removeItem('form_submitted');
+    window.gtag?.('event', 'form_submit_success');
+  } else {
+    window.location.replace('/');
+  }
 </script>
 
 <style>
