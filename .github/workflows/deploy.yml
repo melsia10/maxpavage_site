@@ -22,21 +22,31 @@ jobs:
             exit 0
           fi
           echo "Fichiers HEIC détectés — installation du convertisseur..."
-          sudo apt-get install -y -q libheif-examples
+          pip install --quiet --break-system-packages pillow-heif
+          changed=0
           while IFS= read -r -d $'\0' heic; do
             jpg="${heic%.*}.jpg"
             echo "Conversion : $heic → $jpg"
-            heif-convert "$heic" "$jpg"
+            if ! python3 -c "import sys, pillow_heif; heif_file = pillow_heif.open_heif(sys.argv[1], convert_hdr_to_8bit=True); heif_file.to_pillow().convert('RGB').save(sys.argv[2], quality=90)" "$heic" "$jpg"; then
+              echo "::warning::Échec de conversion pour $heic — fichier ignoré (format non supporté)."
+              rm -f "$jpg"
+              continue
+            fi
             rm "$heic"
             rel_heic="$(basename "$heic")"
             rel_jpg="$(basename "$jpg")"
             find src -name "*.md" -exec sed -i "s|${rel_heic}|${rel_jpg}|g" {} +
+            changed=1
           done < <(find src \( -name "*.heic" -o -name "*.HEIC" \) -print0)
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add -A
-          git commit -m "chore: convert HEIC images to JPEG [skip ci]"
-          git push
+          if [ "$changed" = "1" ]; then
+            git config user.name "github-actions[bot]"
+            git config user.email "github-actions[bot]@users.noreply.github.com"
+            git add -A
+            git commit -m "chore: convert HEIC images to JPEG [skip ci]"
+            git push
+          else
+            echo "Aucune conversion réussie, rien à valider."
+          fi
 
       - uses: actions/setup-node@v4
         with:

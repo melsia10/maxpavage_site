@@ -1,12 +1,15 @@
 ---
-title: "Rénovation d'une cours arrière"
-description: "Rénovation complète d’une cour arrière à Montzen : préparation, pavage et finitions soignées."
-date: 2026-06-11
-location: "Montzen"
+title: Rénovation d'une cours arrière à Montzen - Pavage
+description: "Rénovation complète d'une cour arrière à Montzen: terrassement,
+  dépose de l'ancien pavage et pose de pavés anthracite avec des coupes
+  soignées."
+date: 2026-07-26
+location: Montzen, province de Liège
 tag: amenagements-exterieurs-1
 cover: ./images/cover-cours-arriere.jpeg
-coverAlt: "Cour arrière rénovée par Max Pavage à Montzen"
+coverAlt: Cour arrière rénovée par Max Pavage à Montzen
 ---
+Cette cour arrière à Montzen a fait l'objet d'une rénovation complète : terrassement du terrain, retrait de l'ancien pavage devenu vétuste, puis pose de nouveaux pavés anthracite. Une attention particulière a été portée aux coupes et aux finitions pour garantir un résultat net et durable, à la hauteur de nos exigences sur chaque chantier, petit ou grand.
 
 ![Cour arrière rénovée — vue d’ensemble](./images/cours-arriere-1.jpg)
 

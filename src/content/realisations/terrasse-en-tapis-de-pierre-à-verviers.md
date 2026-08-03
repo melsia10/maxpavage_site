@@ -1,10 +1,10 @@
 ---
-title: Terrasse en tapis de pierre à Verviers
+title: Terrasse à Verviers -  Tapis de pierre
 description: "Rénovation de terrasse à Verviers : pose d'un tapis de pierre
   (revêtement drainant) avec bordure contrastée pour un fini moderne et durable.
   "
 date: 2026-07-24
-location: Verviers
+location: Verviers, province de Liège
 tag: tapis-de-pierre-6
 cover: images/dji_0588.jpg
 coverAlt: Terrasse en tapis de pierre réalisée par Max Pavage
